@@ -20,6 +20,10 @@ def main(input_path: str, output_path: str) -> None:
         raise ValueError("Only CSV and Parquet are supported for now.")
 
     logger.info(f"Loaded shape: {df.shape}")
+    
+    # Convert all 'object' (mixed text/number) columns to pure strings so Parquet doesn't crash
+    for col in df.select_dtypes(include=['object']).columns:
+        df[col] = df[col].astype(str)
 
     output_file.parent.mkdir(parents=True, exist_ok=True)
     df.to_parquet(output_file, index=False)
