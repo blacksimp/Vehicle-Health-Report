@@ -13,7 +13,7 @@ def main(input_path: str, output_path: str) -> None:
     logger.info(f"Reading file: {input_file}")
 
     if input_file.suffix == ".csv":
-        df = pd.read_csv(input_file)
+        df = pd.read_csv(input_file, on_bad_lines='warn')
     elif input_file.suffix == ".parquet":
         df = pd.read_parquet(input_file)
     else:
