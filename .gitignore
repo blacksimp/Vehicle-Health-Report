@@ -7,3 +7,7 @@ artifacts/
 reports/
 .mlflow/
 .env
+# Ignore datasets
+data/
+*.csv
+*.parquet
